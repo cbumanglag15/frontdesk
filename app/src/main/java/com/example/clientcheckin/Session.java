@@ -10,12 +10,17 @@ public class Session {
     public static Session getSession() {
         if (session == null) {
             session = new Session();
+            try {
+                attemptServerConnection();
+            } catch (Exception e) {
+
+            }
         }
 
         return session;
     }
 
-    public int attemptServerConnection() {
+    private static int attemptServerConnection() {
         try {
             URL url = new URL("http://localhost:8080/cci-server/ConnectionManager");
             URLConnection connection = url.openConnection();
